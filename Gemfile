@@ -13,6 +13,7 @@ gem 'bootstrap_form'
 gem 'sidekiq'
 gem 'unicorn'
 gem 'sentry-raven'
+gem 'paratrooper'
 
 group :development do
   gem 'sqlite3'
