@@ -10,6 +10,10 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem 'bcrypt'
 gem 'bootstrap_form'
+gem 'sidekiq'
+gem 'unicorn'
+gem 'sentry-raven'
+gem 'paratrooper'
 
 group :development do
   gem 'sqlite3'
@@ -31,6 +35,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner', '1.2.0'
   gem 'capybara'
+  gem 'capybara-email', github: 'dockyard/capybara-email'
   gem 'launchy'
 end
 
