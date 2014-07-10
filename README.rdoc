@@ -11,5 +11,6 @@ Current features include:
 * "My Queue" function so users can store videos in a personal queue
 * Follow other users and see their video reviews and queue
 * Automated email generation for new users, password resets, and friend invites
+* Simple deployment pipeline
 * More to come...
 
