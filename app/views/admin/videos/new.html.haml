@@ -1,0 +1,28 @@
+%section.admin_add_video
+  .container
+    .row
+      .col-md-8.col-md-offset-2
+        = bootstrap_form_for([:admin, @video], layout: :default) do |f|
+          %ul.nav.nav-tabs
+            %li
+              %a(href="") Recent Payments
+            %li.active
+              %a(href="") Add a New Video
+          %br
+          %fieldset
+            = f.text_field :title, hide_label: true, placeholder: "Title"
+            = f.select :category_id, options_for_select(Category.all.map { |category| [category.name, category.id] }), hide_label: true
+            = f.text_area :description, hide_label: true, placeholder: "Description", rows: 8
+            .form-group
+              %label.control-label.col-sm-3 Large Cover
+              .col-sm-9
+                %col.btn.btn-file
+                  %input.form-control(type="file")
+            .form-group
+              %label.control-label.col-sm-3 Small Cover
+              .col-sm-6
+                %col.btn.btn-file
+                  %input.form-control(type="file")
+
+            = f.form_group do
+              = f.submit "Add Video", class: "btn btn-success btn-block"
