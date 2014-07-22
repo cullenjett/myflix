@@ -27,5 +27,8 @@ Myflix::Application.configure do
   :domain         => 'cullenjett-myflix.heroku.com',
   :authentication => :plain,
 }
+
 ActionMailer::Base.delivery_method = :smtp
+
+config.action_mailer.default_url_options = { host: 'cullenjett-myflix.heroku.com' }
 end
