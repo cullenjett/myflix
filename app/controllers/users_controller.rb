@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :invitation_token)
+    params.require(:user).permit(:name, :email, :password)
   end
 
   def handle_invitation
