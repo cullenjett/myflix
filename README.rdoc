@@ -11,6 +11,9 @@ Current features include:
 * "My Queue" function so users can store videos in a personal queue
 * Follow other users and see their video reviews and queue
 * Automated email generation for new users, password resets, and friend invites
+* Background processing w/Sidekiq
 * Simple deployment pipeline
+* Admin users can upload videos (file upload feature built using CarrierWave)
+* Amazon S3
 * More to come...
 
