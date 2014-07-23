@@ -5,12 +5,13 @@
         %header
           %h1.text-center Register
         %fieldset
+          = f.text_field :name, hide_label: true, placeholder: "Your name"
           = f.email_field :email, hide_label: true, placeholder: "Email"
           = f.password_field :password, hide_label: true, placeholder: "Password"
-          = f.text_field :name, hide_label: true, placeholder: "What's your name?"
           = hidden_field_tag :invitation_token, @invitation_token 
           = f.form_group do
             = f.submit "Sign Up", class: "btn btn-success btn-block"
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key=#{ENV['STRIPE_PUBLISHABLE_KEY']} data-name="MyFlix Sign Up Charge" data-description="WILL NOT CHARGE" data-amount="999"></script>
           %p.text-center 
             Already registered? 
             = link_to "Sign in here", sign_in_path
