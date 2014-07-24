@@ -14,6 +14,7 @@ Current features include:
 * Background processing w/Sidekiq
 * Simple deployment pipeline
 * Admin users can upload videos (file upload feature built using CarrierWave)
-* Amazon S3
+* Amazon S3 used to store video images uploaded by admin
+* Uses Stripe to accept credit card payments
 * More to come...
 
