@@ -1,18 +1,49 @@
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+<script type="text/javascript">
+Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
+</script>
+
+= javascript_include_tag 'payment'
+
 %section.register.container
   .row
     .col-sm-6.col-sm-offset-3
-      = bootstrap_form_for(@user) do |f|
+      = bootstrap_form_for @user, html: {id: "payment-form"} do |f|
         %header
           %h1.text-center Register
         %fieldset
           = f.text_field :name, hide_label: true, placeholder: "Your name"
           = f.email_field :email, hide_label: true, placeholder: "Email"
           = f.password_field :password, hide_label: true, placeholder: "Password"
-          = hidden_field_tag :invitation_token, @invitation_token 
-          = f.form_group do
-            = f.submit "Sign Up", class: "btn btn-success btn-block"
-            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key=#{ENV['STRIPE_PUBLISHABLE_KEY']} data-name="MyFlix Sign Up Charge" data-description="WILL NOT CHARGE" data-amount="999"></script>
-          %p.text-center 
-            Already registered? 
-            = link_to "Sign in here", sign_in_path
+          = hidden_field_tag :invitation_token, @invitation_token
+        %hr
+
+        %fieldset.credit-card
+          %p.text-center (Leave these fields as they are to use a fake credit card)
+          %span.payment-errors
+
+          .row.form-row
+            .col-sm-4.col-sm-offset-1
+              = label_tag nil, "Credit Card #", class: "control-label"
+            .col-sm-6
+              = text_field_tag nil, nil, value: "4242 4242 4242 4242", class: "form-control", data: {stripe: "number"}
+          .row.form-row
+            .col-sm-4.col-sm-offset-1
+              = label_tag nil, "CVC", class: "control-label"
+            .col-sm-6
+              = text_field_tag nil, nil, value: "123", class: "form-control", data: {stripe: "cvc"}
+          .row.form-row
+            .col-sm-4.col-sm-offset-1
+              = label_tag nil, "Expiration", class: "control-label"
+            .col-sm-3  
+              = select_month(Date.today, {add_month_numbers: true},  class: 'form-control', data: {stripe: "exp-month"})
+            .col-sm-3
+              = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, class: 'form-control', data: {stripe: "exp-year"})
+          
+        = f.form_group do
+          = f.submit "Sign Up", class: "btn btn-success btn-block"
+        %p.text-center 
+          Already registered? 
+          = link_to "Sign in here", sign_in_path
 
