@@ -8,7 +8,7 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
 
 %section.register.container
   .row
-    .col-sm-6.col-sm-offset-3
+    .col-md-6.col-md-offset-3
       = bootstrap_form_for @user, html: {id: "payment-form"} do |f|
         %header
           %h1.text-center Register
@@ -24,21 +24,21 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
           %span.payment-errors
 
           .row.form-row
-            .col-sm-4.col-sm-offset-1
+            .col-sm-4
               = label_tag nil, "Credit Card #", class: "control-label", for: "cc-number"
-            .col-sm-6
+            .col-sm-8
               = text_field_tag nil, nil, value: "4242 4242 4242 4242", class: "form-control", id: "cc-number", data: {stripe: "number"}
           .row.form-row
-            .col-sm-4.col-sm-offset-1
+            .col-sm-4
               = label_tag nil, "CVC", class: "control-label", for: "cvc-code"
-            .col-sm-6
+            .col-sm-8
               = text_field_tag nil, nil, value: "123", class: "form-control", id: "cvc-code", data: {stripe: "cvc"}
           .row.form-row
-            .col-sm-4.col-sm-offset-1
+            .col-sm-4
               = label_tag nil, "Expiration", class: "control-label"
-            .col-sm-3  
+            .col-sm-4.col-xs-6  
               = select_month(Date.today, {add_month_numbers: true},  class: 'form-control', data: {stripe: "exp-month"})
-            .col-sm-3
+            .col-sm-4.col-xs-6
               = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, class: 'form-control', data: {stripe: "exp-year"})
           
         = f.form_group do
