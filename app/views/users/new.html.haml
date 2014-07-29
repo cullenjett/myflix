@@ -25,14 +25,14 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
 
           .row.form-row
             .col-sm-4.col-sm-offset-1
-              = label_tag nil, "Credit Card #", class: "control-label"
+              = label_tag nil, "Credit Card #", class: "control-label", for: "cc-number"
             .col-sm-6
-              = text_field_tag nil, nil, value: "4242 4242 4242 4242", class: "form-control", data: {stripe: "number"}
+              = text_field_tag nil, nil, value: "4242 4242 4242 4242", class: "form-control", id: "cc-number", data: {stripe: "number"}
           .row.form-row
             .col-sm-4.col-sm-offset-1
-              = label_tag nil, "CVC", class: "control-label"
+              = label_tag nil, "CVC", class: "control-label", for: "cvc-code"
             .col-sm-6
-              = text_field_tag nil, nil, value: "123", class: "form-control", data: {stripe: "cvc"}
+              = text_field_tag nil, nil, value: "123", class: "form-control", id: "cvc-code", data: {stripe: "cvc"}
           .row.form-row
             .col-sm-4.col-sm-offset-1
               = label_tag nil, "Expiration", class: "control-label"
