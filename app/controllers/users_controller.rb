@@ -18,13 +18,14 @@ class UsersController < ApplicationController
         handle_invitation
         AppMailer.send_welcome_email(@user).deliver
         session[:user_id] = @user.id
-        flash[:success] = "Welcome to MyFLiX! You are now signed in as #{@user.name}"
+        flash[:success] = "Welcome to MyFlix! You are now signed in as #{@user.name}"
         redirect_to home_path
       else
         flash[:danger] = charge.error_message
         render 'new'
       end
     else
+      flash[:danger] = "Oops, something went wrong with your user information."
       render 'new'
     end
   end
