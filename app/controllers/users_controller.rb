@@ -7,8 +7,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    cullen = User.where(email: "cullenjett@gmail.com").first
     result = UserSignup.new(@user).sign_up(params[:stripeToken], params[:invitation_token])
     if result.successful?
+      @user.follow(cullen) if cullen
       session[:user_id] = @user.id
       flash[:success] = "Welcome to MyFlix! You are now signed in as #{@user.name}"
       redirect_to home_path
@@ -39,8 +41,5 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password)
   end
 
-  
+
 end
-
-
-

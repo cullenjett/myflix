@@ -1,6 +1,6 @@
 require "rails_helper"
- 
-describe UsersController do  
+
+describe UsersController do
   describe "GET new" do
     it "sets @user as a new User" do
       get :new
@@ -43,7 +43,7 @@ describe UsersController do
 
     it "sets @user" do
       alice = Fabricate(:user)
-      set_current_user(alice)      
+      set_current_user(alice)
       get :show, id: alice.id
       expect(assigns(:user)).to eq(alice)
     end
@@ -74,6 +74,3 @@ describe UsersController do
     end
   end #GET new_with_invitation_token
 end
-
-
-
