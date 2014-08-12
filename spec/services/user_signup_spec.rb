@@ -5,13 +5,18 @@ describe UserSignup do
     after { ActionMailer::Base.deliveries.clear }
 
     context "valid user info and credit card" do
-      let(:customer) { double(:customer, successful?: true) }
+      let(:customer) { double(:customer, successful?: true, customer_token: 'abc') }
 
       before { expect(StripeWrapper::Customer).to receive(:create).and_return(customer) }
 
       it "creates the user" do
         UserSignup.new(Fabricate.build(:user)).sign_up("some stripe token", nil)
         expect(User.count).to eq(1)
+      end
+
+      it "stores the customer token from stripe" do
+        UserSignup.new(Fabricate.build(:user)).sign_up("some stripe token", nil)
+        expect(User.first.customer_token).to eq('abc')
       end
 
       it "makes the user follow in the inviter" do
@@ -68,7 +73,7 @@ describe UserSignup do
     end
 
     context "sending emails" do
-      let(:customer) { double(:customer, successful?: true) }
+      let(:customer) { double(:customer, successful?: true, customer_token: 'abc') }
 
       before { expect(StripeWrapper::Customer).to receive(:create).and_return(customer) }
 

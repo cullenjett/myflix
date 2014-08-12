@@ -8,14 +8,14 @@ Myflix::Application.routes.draw do
   end
 
   resources :categories, only: [:show]
-  
+
   resources :videos, only: [:show] do
     collection do
       get 'search', to: 'videos#search'
     end
     resources :reviews, only: [:create]
   end
-  
+
   resources :users, only: [:create, :show]
   get '/register', to: 'users#new', as: 'register'
   get '/register/:token', to: 'users#new_with_invitation_token', as: 'register_with_token'
@@ -39,4 +39,6 @@ Myflix::Application.routes.draw do
   get '/expired_token', to: 'pages#expired_token'
 
   resources :invitations, only: [:new, :create]
+
+  mount StripeEvent::Engine => "/stripe_events"
 end
