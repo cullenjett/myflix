@@ -12,7 +12,7 @@ feature "User signs in" do
     click_button "Sign In"
 
     expect(page).to have_content "Cullen Jett"
-  end 
+  end
 
   scenario "from the sign in page" do
     alice = Fabricate(:user)
@@ -20,5 +20,12 @@ feature "User signs in" do
     sign_in(alice)
 
     expect(page).to have_content alice.name
-  end 
+  end
+
+  scenario "with deactivated account" do
+    alice = Fabricate(:user, active: false)
+    sign_in(alice)
+    expect(page).not_to have_content(alice.name)
+    expect(page).to have_content("Your account has been suspended. Please contact customer service.")
+  end
 end #User signs in
